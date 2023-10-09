@@ -10,6 +10,7 @@ class SupportedAdapters(StrEnum):
     feishu = "Feishu"
     red = "RedProtocol"
     dodo = "DoDo"
+    satori = "Satori"
 
     fake = "fake"  # for nonebug
 
