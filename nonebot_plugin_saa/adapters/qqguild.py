@@ -4,6 +4,7 @@ from typing import List, Literal
 from nonebot.adapters import Event
 from nonebot.adapters import Bot as BaseBot
 
+from ..config import plugin_config
 from ..utils import SupportedAdapters
 from ..types import Text, Image, Reply, Mention
 from ..auto_select_bot import register_list_targets
@@ -188,6 +189,9 @@ try:
                     file_image=file_image,  # type: ignore
                     markdown=markdown,  # type: ignore
                     message_reference=reference,  # type: ignore
+                    msg_id="1000"
+                    if plugin_config.saa_qqguild_use_magic_msg_id_to_send
+                    else None,
                 )
             else:
                 guild_id = await QQGuildDMSManager.aget_guild_id(target, bot)
@@ -200,6 +204,9 @@ try:
                     file_image=file_image,  # type: ignore
                     markdown=markdown,  # type: ignore
                     message_reference=reference,  # type: ignore
+                    msg_id="1000"
+                    if plugin_config.saa_qqguild_use_magic_msg_id_to_send
+                    else None,
                 )
 
         return QQGuildReceipt(bot_id=bot.self_id, sent_msg=sent_msg)

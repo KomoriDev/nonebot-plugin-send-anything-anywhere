@@ -4,6 +4,7 @@ from typing import List, Union, Literal, Optional
 from nonebot.adapters import Event
 from nonebot.adapters import Bot as BaseBot
 
+from ..config import plugin_config
 from ..utils import SupportedAdapters
 from ..types import Text, Image, Reply, Mention
 from ..auto_select_bot import register_list_targets
@@ -180,11 +181,17 @@ try:
                 msg_return = await bot.send_to_dms(
                     guild_id=str(guild_id),
                     message=message,
+                    msg_id="1000"
+                    if plugin_config.saa_qqguild_use_magic_msg_id_to_send
+                    else None,
                 )
             elif isinstance(target, TargetQQGuildChannel):
                 msg_return = await bot.send_to_channel(
                     channel_id=str(target.channel_id),
                     message=message,
+                    msg_id="1000"
+                    if plugin_config.saa_qqguild_use_magic_msg_id_to_send
+                    else None,
                 )
             elif isinstance(target, TargetQQPrivate):
                 msg_return = await bot.send_to_c2c(
